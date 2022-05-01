@@ -110,7 +110,7 @@ bool LList::removeAll(int data)
 	return count > 0;
 }
 
-std::ostream& operator<<(std::ostream& out, const LList& list) 
+std::ostream& operator<<(std::ostream& out, const LList& list)
 {
 	out << "[";
 	LList::Node* node = list.head->next;
@@ -123,6 +123,7 @@ std::ostream& operator<<(std::ostream& out, const LList& list)
 
 	return out;
 }
+
 
 void LList::destroy_list()
 {
@@ -143,6 +144,11 @@ LList::LList(const LList& other)
 
 LList& LList::operator=(const LList& other)
 {
+	if (this == &other)
+	{
+		return *this;
+	}
+
 	destroy_list();
 	head = new Node;
 	head->next = nullptr;
