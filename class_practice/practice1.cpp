@@ -1,28 +1,66 @@
 #include <iostream>
 #include <vector>
 
-int searchIndex(std::vector <int> arr, int target, int mid)
+// Performs a binary search to find an occurence of a key
+// Time Complexity = O(logn)
+int searchIndex(std::vector<int> vect, int key, int left, int right, int mid)
 {
-    if(target > arr.at(mid))
+    if (vect.at(mid) == key)
     {
-        searchIndex(arr, target, mid / 2);
+        return mid;
     }
 
-    if(target < arr.at(mid))
+    if (vect.at(mid) > key)
     {
-        searchIndex(arr, target, mid + (mid / 2));
+        right = mid - 1;
+        mid = right / 2 + 1;
+        return searchIndex(vect, key, right, left, mid);
     }
 
-    return mid;
+    if (vect.at(mid) < key)
+    {
+        left = mid + 1;
+        mid = (right + left) / 2;
+        return searchIndex(vect, key, right, left, mid);
+    }
+
+    return -1;
+}
+
+// Performs a linear search to find the first occurence of a key
+// Time Complexity = O(m)
+int find_first(std::vector<int> vect, int key, int index)
+{
+    while (vect.at(index) == key)
+    {
+        index--;
+    }
+
+    return index + 1;
+}
+
+// Performs a linear search to find the last occurence of a key
+// Time Complexity = O(g)
+int find_last(std::vector<int> vect, int key, int index)
+{
+    while (vect.at(index) == key)
+    {
+        index++;
+    }
+
+    return index - 1;
 }
 
 int main()
 {
-    int arr = [1, 2, 3, 4, 5, 6, 6, 6, 6, 7];
-    int size = sizeof(arr) / sizeof(arr[0]);
-    std::vector <int> vect(arr, arr+size);
-
-    int mid = vect.size() / 2;
-    std::cout << searchIndex(vect, 6, mid) << std::endl;
-    return 0;
+    std::vector <int> vect{ 1, 2, 3, 4, 5, 6, 6, 6, 6, 7, 8, 9};
+    int size = vect.size();
+    int mid = (size - 1) / 2 + 1;
+    int key = 6;
+    int index = searchIndex(vect, key, 0, size - 1, mid);
+    
+    std::cout << "First occurence of " << key << " is at index " << find_first(vect, key, index) << std::endl;
+    std::cout << "Last occurence of " << key << " is at index " << find_last(vect, key, index) << std::endl;
+    std::cout << "Finding the first occurence: O(logn + m)\n" << "Finding the last occurence: O(logn + g)\n" << std::endl;
 }
+
