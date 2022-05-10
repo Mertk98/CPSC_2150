@@ -3,8 +3,10 @@
 
 // Performs a binary search to find an occurence of a key
 // Time Complexity = O(logn)
-int searchIndex(std::vector<int> vect, int key, int left, int right, int mid)
+int searchIndex(std::vector<int> vect, int key, int left, int right)
 {
+    int mid = (left + right) / 2;
+
     if (vect.at(mid) == key)
     {
         return mid;
@@ -13,42 +15,47 @@ int searchIndex(std::vector<int> vect, int key, int left, int right, int mid)
     if (vect.at(mid) > key)
     {
         right = mid - 1;
-        mid = right / 2 + 1;
-        return searchIndex(vect, key, right, left, mid);
+        return searchIndex(vect, key, right, left);
     }
 
     if (vect.at(mid) < key)
     {
         left = mid + 1;
-        mid = (right + left) / 2;
-        return searchIndex(vect, key, right, left, mid);
+        return searchIndex(vect, key, right, left);
     }
 
     return -1;
 }
 
-// Performs a linear search to find the first occurence of a key
-// Time Complexity = O(m)
-int find_first(std::vector<int> vect, int key, int index)
-{
-    while (vect.at(index) == key)
-    {
-        index--;
+int FBinarySearch(int low, int high, const std::vector<int>& data, int target) {
+    int res = -1;
+    int mid;
+    while (low <= high) {
+        mid = (low + high) / 2;
+        if (target == data[mid]) {
+            res = mid;
+            high = mid - 1;
+        }
+        else
+            if (target < data[mid])
+                high = mid - 1;
+            else
+                low = mid + 1;
     }
-
-    return index + 1;
+    return res;
 }
 
-// Performs a linear search to find the last occurence of a key
-// Time Complexity = O(g)
-int find_last(std::vector<int> vect, int key, int index)
-{
-    while (vect.at(index) == key)
-    {
-        index++;
-    }
-
-    return index - 1;
+int LBinarySearch(int low, int high, const std::vector<int>& data, int target, int res = -1) {
+    int mid;
+    if (low > high)
+        return res;
+    mid = (low + high) / 2;
+    if (target == data[mid])
+        return LBinarySearch(mid + 1, high, data, target, mid);
+    if (target < data[mid])
+        return LBinarySearch(low, mid - 1, data, target, res);
+    else
+        return LBinarySearch(mid + 1, high, data, target, res);
 }
 
 int main()
@@ -57,10 +64,8 @@ int main()
     int size = vect.size();
     int mid = (size - 1) / 2 + 1;
     int key = 6;
-    int index = searchIndex(vect, key, 0, size - 1, mid);
-    
-    std::cout << "First occurence of " << key << " is at index " << find_first(vect, key, index) << std::endl;
-    std::cout << "Last occurence of " << key << " is at index " << find_last(vect, key, index) << std::endl;
-    std::cout << "Finding the first occurence: O(logn + m)\n" << "Finding the last occurence: O(logn + g)\n" << std::endl;
+    int index = searchIndex(vect, key, 0, size - 1);
+    std::cout << index << std::endl;
+    /*std::cout << "First occurence of " << key << " is at index " << FBinarySearch(0, size-1, vect, key) << std::endl;
+    std::cout << "Last occurence of " << key << " is at index " << LBinarySearch(0, size - 1, vect, key) << std::endl;*/
 }
-
