@@ -8,9 +8,16 @@ private:
 	int x, y;
 	double radius;
 	static int class_count;
-	// Helper functions
+	// Helper functions and variables
 	double length(const int x1, const int y1, const int x2, const int y2);
 	bool intersectY(const int x1, const int x2 = 0);
+	struct Check
+	{
+		bool Lintersect;
+		bool Rintersect;
+	};
+	Check check;
+	
 public:
 	Circle();
 	Circle(int x, int y, int radius);

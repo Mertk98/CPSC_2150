@@ -8,7 +8,8 @@ Circle::Circle()
 {
 	x = y = 0;
 	radius = 10;
-
+	check.Lintersect = true;
+	check.Rintersect = true;
 	//class_count++;
 }
 
@@ -45,6 +46,24 @@ void Circle::translateXY(int X, int Y)
 {
 	x += X;
 	y += Y;
+	
+	// decrements the class_count if the Circle falls to the left side
+	// of the y-axis or intersects with y-axis
+	if((x < 0 || intersectY(x)) && check.Lintersect)
+	{
+		check.Lintersect = false;
+		check.Rintersect = true;
+		class_count--;
+	}
+	
+	// increments the class_count if the Circle does not intersect with 
+	// y-axis and stays on the right side of y-axis
+	if(x >= 0 && !intersectY(x) && check.Rintersect)
+	{
+		check.Lintersect = true;
+		check.Rintersect = false; 
+		class_count++;
+	}
 }
 
 void Circle::setRadius(double r)
@@ -72,18 +91,20 @@ bool Circle::intersect(Circle c2)
 	return l <= (c2.getRadius() + radius);
 }
 
+int Circle::getNumberofCurrentCircles()
+{
+	return class_count;
+}
+
 // Helper functions
+// Calculates the length between centre of two circles
 double Circle::length(const int x1, const int y1, const int x2, int y2)
 {
 	return (double) std::sqrt(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2));
 }
 
+// returns true if the circle intersects with y-axis
 bool Circle::intersectY(const int x1, const int x2)
 {
 	return std::pow(radius, 2) > std::pow(x2 - x1, 2);
-}
-
-int Circle::getNumberofCurrentCircles()
-{
-	return class_count;
 }
