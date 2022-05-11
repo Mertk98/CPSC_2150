@@ -32,7 +32,7 @@ void LList::insert(int data)
 int LList::length()
 {
 	int size = 0;
-	Node* node = head;
+	Node* node = head->next;
 	while(node->next != nullptr)
 	{
 		size++;
@@ -111,6 +111,29 @@ void LList::twice()
 		last = last->next;
 	}
 
+}
+
+LList LList::halve()
+{
+	LList halve_list;
+	int half = (length() - 1);
+	Node* node = head->next;
+	for(int i = 0; i < half; i++)
+	{
+		node = node->next;
+	}
+
+	Node* next = nullptr;
+
+	for(int i = half; i < length() - 1; i++)
+	{
+		next = node->next;
+		halve_list.insert(node->data);
+		delete node;
+		node = next;
+	}
+
+	return halve_list;
 }
 
 bool LList::removeAll(int data)

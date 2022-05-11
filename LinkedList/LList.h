@@ -27,6 +27,7 @@ public:
 	int last() const;
 	bool removeAll(int);
 	void twice();
+	LList halve();
 	friend std::ostream& operator<<(std::ostream&, const LList&);
 	void destroy_list();
 	LList(const LList&);
