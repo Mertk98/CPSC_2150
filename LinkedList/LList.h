@@ -14,6 +14,7 @@ private:
 	
 	Node* head;
 
+	// recursive
 	static Node* last_node(Node* node);
 
 public:

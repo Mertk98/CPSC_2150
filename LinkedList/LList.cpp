@@ -87,7 +87,7 @@ LList::Node* LList::last_node(LList::Node* node)
 {
 	if(node->next != nullptr)
 	{
-		last_node(node->next);
+		node = last_node(node->next);
 	}
 	
 	return node;
@@ -99,7 +99,18 @@ void LList::twice()
 	// O(n)	
 	Node* first = head->next;
 	Node* last = last_node(first);
-	std::cout << last->data << std::endl;
+	int size = length();
+
+	for(int i = 0; i < size; i++)
+	{
+		Node* node = new Node;
+		node->data = first->data;
+		node->next = nullptr;
+		last->next = node;
+		first = first->next;
+		last = last->next;
+	}
+
 }
 
 bool LList::removeAll(int data)
@@ -159,6 +170,8 @@ void LList::destroy_list()
 
 LList::LList(const LList& other)
 {
+	head = new Node;
+	head->next = nullptr;
 	operator=(other);
 }
 
