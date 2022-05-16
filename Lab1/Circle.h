@@ -11,12 +11,8 @@ private:
 	// Helper functions and variables
 	double length(const int x1, const int y1, const int x2, const int y2);
 	bool intersectY(const int x1, const int x2 = 0);
-	struct Check
-	{
-		bool Lintersect;
-		bool Rintersect;
-	};
-	Check check;
+	bool Lintersect;
+	bool Rintersect;
 	
 public:
 	Circle();

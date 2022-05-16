@@ -8,8 +8,8 @@ Circle::Circle()
 {
 	x = y = 0;
 	radius = 10;
-	check.Lintersect = true;
-	check.Rintersect = true;
+	Lintersect = true;
+	Rintersect = true;
 	//class_count++;
 }
 
@@ -49,19 +49,19 @@ void Circle::translateXY(int X, int Y)
 	
 	// decrements the class_count if the Circle falls to the left side
 	// of the y-axis or intersects with y-axis
-	if((x < 0 || intersectY(x)) && check.Lintersect)
+	if((x < 0 || intersectY(x)) && Lintersect)
 	{
-		check.Lintersect = false;
-		check.Rintersect = true;
+		Lintersect = false;
+		Rintersect = true;
 		class_count--;
 	}
 	
 	// increments the class_count if the Circle does not intersect with 
 	// y-axis and stays on the right side of y-axis
-	if(x >= 0 && !intersectY(x) && check.Rintersect)
+	if(x >= 0 && !intersectY(x) && Rintersect)
 	{
-		check.Lintersect = true;
-		check.Rintersect = false; 
+		Lintersect = true;
+		Rintersect = false; 
 		class_count++;
 	}
 }

@@ -27,4 +27,9 @@ int main()
     std::cout << "c2 = ";
     c2.displayCircle();
     std::cout << "Class count = " << c1.getNumberofCurrentCircles() << std::endl;
+
+    c2.translateXY(-80, 10);
+    std::cout << "c2 = ";
+    c2.displayCircle();
+    std::cout << "Class count = " << c1.getNumberofCurrentCircles() << std::endl;
 }
