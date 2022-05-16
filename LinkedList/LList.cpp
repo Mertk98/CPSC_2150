@@ -2,24 +2,36 @@
 #include "LList.h"
 #include <vector>
 
-LList::LList()
+template <typename T>
+Node<T>::Node()
 {
-	head = new Node;
-	head->next = nullptr;
+	next = nullptr;
 }
 
-bool LList::is_Empty() const
+template <typename T>
+Node<T>::Node(T data, Node* next)
+{
+	this->next = next;
+	this->data = data;
+}
+
+template <typename T>
+LList<T>::LList()
+{
+	head = new Node<T>;
+}
+
+template <typename T>
+bool LList<T>::is_Empty() const
 {
 	return head->next == nullptr;
 }
 
-void LList::insert(int data)
+template <typename T>
+void LList<T>::insert(T data)
 {
-	Node* node = new Node;
-	node->data = data;
-	node->next = nullptr;
-
-	Node* current = head;
+	Node<T>* node = new Node<T>(data, nullptr);
+	Node<T>* current = head;
 
 	while(current->next != nullptr)
 	{
@@ -29,10 +41,11 @@ void LList::insert(int data)
 	current->next = node;
 }
 
-int LList::length()
+template <typename T>
+T LList<T>::length()
 {
 	int size = 0;
-	Node* node = head->next;
+	Node<T>* node = head->next;
 	while(node->next != nullptr)
 	{
 		size++;
@@ -42,9 +55,10 @@ int LList::length()
 	return size;
 }
 
-bool LList::search(int data)
+template <typename T>
+bool LList<T>::search(T data)
 {
-	Node* node = head->next;
+	Node<T>* node = head->next;
 
 	while (node != nullptr)
 	{
@@ -58,7 +72,8 @@ bool LList::search(int data)
 	return false;
 }
 
-int LList::first() const
+template <typename T>
+T LList<T>::first() const
 {
 	if (!is_Empty())
 	{
@@ -68,11 +83,12 @@ int LList::first() const
 	return 0;
 }
 
-int LList::last() const
+template <typename T>
+T LList<T>::last() const
 {
 	if (!is_Empty())
 	{
-		Node* node = head;
+		Node<T>* node = head;
 		while (node->next != nullptr)
 		{
 			node = node->next;
@@ -83,7 +99,8 @@ int LList::last() const
 	return 0;
 }
 
-LList::Node* LList::last_node(LList::Node* node)
+template <typename T>
+Node<T>* LList<T>::last_node(Node<T>* node)
 {
 	if(node->next != nullptr)
 	{
@@ -93,19 +110,18 @@ LList::Node* LList::last_node(LList::Node* node)
 	return node;
 }
 
-void LList::twice()
+template <typename T>
+void LList<T>::twice()
 {
 	// make it efficient
 	// O(n)	
-	Node* first = head->next;
-	Node* last = last_node(first);
+	Node<T>* first = head->next;
+	Node<T>* last = last_node(first);
 	int size = length();
 
 	for(int i = 0; i < size; i++)
 	{
-		Node* node = new Node;
-		node->data = first->data;
-		node->next = nullptr;
+		Node<T>* node = new Node<T>(first->data, nullptr);
 		last->next = node;
 		first = first->next;
 		last = last->next;
@@ -113,17 +129,18 @@ void LList::twice()
 
 }
 
-LList LList::halve()
+template <typename T>
+LList<T> LList<T>::halve()
 {
 	LList halve_list;
 	int half = (length() - 1);
-	Node* node = head->next;
+	Node<T> node = head->next;
 	for(int i = 0; i < half; i++)
 	{
 		node = node->next;
 	}
 
-	Node* next = nullptr;
+	Node<T>* next = nullptr;
 
 	for(int i = half; i < length() - 1; i++)
 	{
@@ -136,13 +153,14 @@ LList LList::halve()
 	return halve_list;
 }
 
-bool LList::removeAll(int data)
+template <typename T>
+bool LList<T>::removeAll(T data)
 {
 	int count = 0;
 	if (!is_Empty())
 	{
-		Node* tmp = nullptr;
-		Node* node = head;
+		Node<T>* tmp = nullptr;
+		Node<T>* node = head;
 
 		while (node->next != nullptr)
 		{
@@ -164,10 +182,11 @@ bool LList::removeAll(int data)
 	return count > 0;
 }
 
-std::ostream& operator<<(std::ostream& out, const LList& list)
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const LList<T>& list)
 {
 	out << "[";
-	LList::Node* node = list.head->next;
+	Node<T>* node = list.head->next;
 	while (node != nullptr)
 	{
 		out << " " << node->data;
@@ -178,11 +197,11 @@ std::ostream& operator<<(std::ostream& out, const LList& list)
 	return out;
 }
 
-
-void LList::destroy_list()
+template <typename T>
+void LList<T>::destroy_list()
 {
-	Node* current = head;
-	Node* next = nullptr;
+	Node<T>* current = head;
+	Node<T>* next = nullptr;
 	while (current != nullptr)
 	{
 		next = current->next;
@@ -191,14 +210,16 @@ void LList::destroy_list()
 	}
 }
 
-LList::LList(const LList& other)
+template <typename T>
+LList<T>::LList(const LList& other)
 {
-	head = new Node;
+	head = new Node<T>;
 	head->next = nullptr;
 	operator=(other);
 }
 
-LList& LList::operator=(const LList& other)
+template <typename T>
+LList<T>& LList<T>::operator=(const LList& other)
 {
 	if (this == &other)
 	{
@@ -206,14 +227,14 @@ LList& LList::operator=(const LList& other)
 	}
 
 	destroy_list();
-	head = new Node;
+	head = new Node<T>;
 	head->next = nullptr;
-	Node* other_node = other.head;
-	Node* node = head;
+	Node<T>* other_node = other.head;
+	Node<T>* node = head;
 
 	while (other_node->next != nullptr)
 	{
-		node->next = new Node;
+		node->next = new Node<T>;
 		node = node->next;
 		other_node = other_node->next;
 		node->data = other_node->data;
@@ -223,7 +244,8 @@ LList& LList::operator=(const LList& other)
 	return *this;
 }
 
-LList::~LList()
+template <typename T>
+LList<T>::~LList()
 {
 	destroy_list();
 }

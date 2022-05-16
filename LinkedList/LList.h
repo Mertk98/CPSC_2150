@@ -2,30 +2,34 @@
 #ifndef _LList_H_
 #define _LList_H_
 #include <iostream>
+template <typename T>
+class Node
+{
+	public:
+	Node();
+	Node(T data, Node<T>* next);
+	Node<T>* next;
+	T data;
+};
 
+template <typename T>
 class LList
 {
 private:
-	struct Node
-	{
-		int data;
-		Node* next;
-	};
-	
-	Node* head;
+	Node<T>* head;
 
 	// recursive
-	static Node* last_node(Node* node);
+	static Node<T>* last_node(Node<T>* node);
 
 public:
 	LList();
 	bool is_Empty() const;
-	void insert(int);
-	int length();
-	bool search(int);
-	int first() const;
-	int last() const;
-	bool removeAll(int);
+	void insert(T);
+	T length();
+	bool search(T);
+	T first() const;
+	T last() const;
+	bool removeAll(T);
 	void twice();
 	LList halve();
 	friend std::ostream& operator<<(std::ostream&, const LList&);

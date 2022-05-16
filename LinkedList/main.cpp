@@ -8,7 +8,7 @@ int& change(int a[], int i)
 
 int main()
 {
-    LList A;
+    LList<int> A;
     for(int i = 0; i < 40; i++)
     {
         A.insert((int)(rand() % 100));
