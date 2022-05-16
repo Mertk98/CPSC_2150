@@ -1,2 +1,2 @@
 # CPSC_2150
-A repository of my course projects
+A repository for my course projects
