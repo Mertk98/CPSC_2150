@@ -107,6 +107,7 @@ int ncr(int n, int r)
 	return ncr(n - 1, r - 1) + ncr(n - 1, r);
 }
 
+// exponential time complexity 2^n - 1 ~ O(2^n)
 void TOH(int n, int A, int B, int C, int& i)
 {
 	if (n > 0)
