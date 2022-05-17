@@ -2,73 +2,57 @@
 #include <cmath>
 #include "Circle.h"
 
-int Circle::class_count = 0;
+int Circle::classCount_ = 0;
 
 Circle::Circle()
 {
-	x = y = 0;
-	radius = 10;
-	Lintersect = true;
-	Rintersect = true;
+	x_ = y_ = 0;
+	radius_ = 10;
+	Lintersect_ = true;
+	Rintersect_ = true;
 	//class_count++;
 }
 
-Circle::Circle(int x, int y, int radius)
+Circle::Circle(int x, int y, double radius)
 {
-	this->x = x;
-	this->y = y;
-	this->radius = radius;
+	x_ = x;
+	y_ = y;
+	setRadius(radius);
 
 	//class_count++;
 
-	if (this->x < 0 && !intersectY(this->x))
+	if (x_ < 0 && !intersectY(x_))
 	{
-		class_count++;
+		classCount_++;
 	}
 }
 
 int Circle::getX()
 {
-	return x;
+	return x_;
 }
 
 int Circle::getY()
 {
-	return y;
+	return y_;
 }
 
 double Circle::getRadius()
 {
-	return radius;
+	return radius_;
 }
 
 void Circle::translateXY(int X, int Y)
 {
-	x += X;
-	y += Y;
-	
-	// decrements the class_count if the Circle falls to the left side
-	// of the y-axis or intersects with y-axis
-	if((x < 0 || intersectY(x)) && Lintersect)
-	{
-		Lintersect = false;
-		Rintersect = true;
-		class_count--;
-	}
-	
-	// increments the class_count if the Circle does not intersect with 
-	// y-axis and stays on the right side of y-axis
-	if(x >= 0 && !intersectY(x) && Rintersect)
-	{
-		Lintersect = true;
-		Rintersect = false; 
-		class_count++;
-	}
+	x_ += X;
+	y_ += Y;
+
+	changeClassCount();
 }
 
 void Circle::setRadius(double r)
 {
-	radius = (r > 0) ? r : 10;
+	radius_ = (r > 0) ? r : 10;
 }
 
 double Circle::computeArea()
@@ -76,35 +60,62 @@ double Circle::computeArea()
 	// acos returns Pi / 2
 	double pi = std::acos(0) * 2;
 
-	return pi * radius * radius;
+	return pi * radius_ * radius_;
 }
 
 void Circle::displayCircle()
 {
-	std::cout << "[ x= " << x << " , y= " << y << ", radius= " << radius << " ]" << std::endl;
+	std::cout << "[ x= " << x_ << " , y= " << y_ << ", radius= " << radius_ << " ]" << std::endl;
 }
 
 bool Circle::intersect(Circle c2)
 {
-	double l = length(x, y, c2.getX(), c2.getY());
+	double l = length(x_, y_, c2.getX(), c2.getY());
 
-	return l <= (c2.getRadius() + radius);
+	return l <= (c2.getRadius() + radius_);
 }
 
 int Circle::getNumberofCurrentCircles()
 {
-	return class_count;
+	return classCount_;
 }
 
 // Helper functions
 // Calculates the length between centre of two circles
 double Circle::length(const int x1, const int y1, const int x2, int y2)
 {
-	return (double) std::sqrt(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2));
+	return (double)std::sqrt(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2));
 }
 
 // returns true if the circle intersects with y-axis
 bool Circle::intersectY(const int x1, const int x2)
 {
-	return std::pow(radius, 2) > std::pow(x2 - x1, 2);
+	return std::pow(radius_, 2) > std::pow(x2 - x1, 2);
+}
+
+void Circle::changeClassCount()
+{
+	// Decrements the class_count if the Circle intersects with 
+	// y-axis and on the left side of y-axis
+	if ((x_ < 0 || intersectY(x_)) && Lintersect_)
+	{
+		Lintersect_ = false;
+		Rintersect_ = true;
+		classCount_--;
+	}
+
+	// increments the class_count if the Circle does not intersect with 
+	// y-axis and on the right side of y-axis
+	if (x_ >= 0 && !intersectY(x_) && Rintersect_)
+	{
+		Lintersect_ = true;
+		Rintersect_ = false;
+		classCount_++;
+	}
+}
+
+
+Circle::~Circle()
+{
+	classCount_--;
 }
