@@ -5,18 +5,20 @@
 class Circle
 {
 private:
-	int x, y;
-	double radius;
-	static int class_count;
-	// Helper functions and variables
+	int x_, y_;
+	double radius_;
+	static int classCount_;
+
+	//Helper functions and variables
 	double length(const int x1, const int y1, const int x2, const int y2);
 	bool intersectY(const int x1, const int x2 = 0);
-	bool Lintersect;
-	bool Rintersect;
-	
+	void changeClassCount();
+	bool Lintersect_;
+	bool Rintersect_;
+
 public:
 	Circle();
-	Circle(int x, int y, int radius);
+	Circle(int x, int y, double radius);
 	int getX();
 	int getY();
 	double getRadius();
@@ -26,6 +28,7 @@ public:
 	void displayCircle();
 	bool intersect(Circle c2);
 	int getNumberofCurrentCircles();
+	~Circle();
 };
 
 #endif // !_CIRCLE_H_
