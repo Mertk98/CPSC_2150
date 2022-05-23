@@ -1,17 +1,17 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>290</x><y>50</y><w>180</w><h>180</h></coordinates><panel_attributes>Customer
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>360</x><y>100</y><w>180</w><h>180</h></coordinates><panel_attributes>Customer
 -
-+static long int customerID_
-+int requestedBeds_
++customerID_
++requestedBeds_
 -
 +getID()
 +getRequestedBeds()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>50</y><w>170</w><h>170</h></coordinates><panel_attributes>Room
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>780</x><y>100</y><w>170</w><h>170</h></coordinates><panel_attributes>Room
 -
-+Customer customer_
-+Date checkInDate_
-+Date checkOutDate_
-+int numOfBeds_
-+static int bedCount_
++customer_
++checkInDate_
++checkOutDate_
++numOfBeds_
++bedsInUse_
 -
 +getCustomer()
 +getCheckInDate()

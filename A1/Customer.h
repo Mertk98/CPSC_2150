@@ -5,7 +5,7 @@
 
 class Customer
 {
-
+    
 };
 
 #endif

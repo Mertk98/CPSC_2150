@@ -5,7 +5,7 @@
 
 class Room
 {
-
+    
 };
 
 #endif
