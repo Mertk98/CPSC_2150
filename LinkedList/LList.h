@@ -4,13 +4,18 @@
 #include <iostream>
 
 template <typename T>
+class LList;
+
+template <typename T>
 class Node
 {
-	public:
-	Node();
-	Node(T data, Node<T>* next);
+private:
 	Node<T>* next;
 	T data;
+public:
+	Node();
+	Node(T data, Node<T>* next);
+	friend class LList;	
 };
 
 template <typename T>
