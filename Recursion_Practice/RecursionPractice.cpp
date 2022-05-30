@@ -61,7 +61,7 @@ int fibonacci(int n)
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-// Fibonacci series with O(n)
+// Fibonacci series with O(n) - Memoization
 int fibn(int n, int memo[])
 {
 	if (n <= 1)
@@ -107,7 +107,7 @@ int ncr(int n, int r)
 	return ncr(n - 1, r - 1) + ncr(n - 1, r);
 }
 
-// exponential time complexity 2^n - 1 ~ O(2^n)
+// exponential time complexity 2^n - 1 ~ O(2^n) | solve it using gp series
 void TOH(int n, int A, int B, int C, int& i)
 {
 	if (n > 0)
@@ -127,7 +127,7 @@ int main()
 	std::cout << fibonacci(6) << std::endl;
 
 	int n = 5;
-	int* memo = new int[n + 1]{ 0 };
+	int* memo = new int[n + 1]{0};
 	std::cout << fibn(n, memo) << std::endl;
 	delete[] memo;
 	std::cout << c(7, 4) << std::endl;
@@ -135,5 +135,6 @@ int main()
 
 	int i = 0;
 	TOH(5, 1, 2, 3, i);
+	std::cout << "number of moves: " << i << std::endl;
 	return 0;
 }
