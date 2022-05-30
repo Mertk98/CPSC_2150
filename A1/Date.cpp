@@ -101,7 +101,7 @@ void Date::parseDate(std::string date)
 		i++;
 	}
 	dmy[i] = std::stoi(date);
-	
+
 	day_ = dmy[0];
 	month_ = dmy[1];
 	year_ = dmy[2];
@@ -123,7 +123,7 @@ void Date::operator+(int extraDay)
 
 
 		int toEnd = months_[month_] - day_;
-		extraDay -= toEnd+1;
+		extraDay -= toEnd + 1;
 
 		if (extraDay > 0)
 		{
@@ -149,7 +149,7 @@ bool Date::operator<=(const Date& other)
 	{
 		return false;
 	}
-	
+
 	else if (year_ < other.year_)
 	{
 		return true;
@@ -207,6 +207,6 @@ std::ostream& operator<<(std::ostream& out, const Date& date)
 {
 	out << " Day/Month/Year: ";
 	out << date.day_ << "/" << date.month_ << "/" << date.year_;
-	
+
 	return out;
 }

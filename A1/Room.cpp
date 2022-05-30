@@ -3,8 +3,6 @@
 #include <vector>
 #include "Room.h"
 
-Date currentDate;
-
 Room::Room()
 {
 	customer_ = nullptr;

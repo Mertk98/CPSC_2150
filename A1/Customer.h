@@ -8,8 +8,10 @@
 class Customer
 {
 private:
+	// Variables
 	std::string customerID_;
 	int requestedBeds_;
+	static int customerCount;
 public:
 	//Constructors
 	Customer();
@@ -20,7 +22,7 @@ public:
 	// Getter functions
 	std::string getID();
 	int getNumOfBeds();
-	~Customer();
+	int getCustomerCount();
 };
 
 #endif

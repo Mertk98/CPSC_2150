@@ -1,20 +1,20 @@
 #include <iostream>
 #include "Customer.h"
 
-//int customerCount = 0;
+int Customer::customerCount = 0;
 
 Customer::Customer()
 {
 	customerID_ = "";
 	requestedBeds_ = 0;
-	//customerCount++;
+	customerCount++;
 }
 
 Customer::Customer(std::string ID, int numOfBeds)
 {
 	customerID_ = ID;
 	requestedBeds_ = numOfBeds;
-	//customerCount++;
+	customerCount++;
 }
 
 std::string Customer::getID()
@@ -37,7 +37,7 @@ void Customer::setNumOfBeds(int numOfBeds)
 	requestedBeds_ = numOfBeds;
 }
 
-Customer::~Customer()
+int Customer::getCustomerCount()
 {
-	//customerCount--;
+	return customerCount;
 }

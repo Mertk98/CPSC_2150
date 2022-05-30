@@ -10,7 +10,7 @@
 class Room
 {
 private:
-	// Vars
+	// Variables
 	Customer* customer_;
 	Date checkInDate_;
 	Date checkOutDate_;
@@ -19,10 +19,8 @@ private:
 	int bedsInUse_;
 	// Helper functions and vars
 	int* parseDate(std::string);
-	static Date currentDate;
 
 public:
-	// Constructors
 	Room();
 	Room(const int);
 	Room(Customer*, std::string, const int, const int, const int);
@@ -41,6 +39,7 @@ public:
 	int getBedsInUse() const;
 	// resets the room
 	void emptyTheRoom();
+	// Destructor
 	~Room();
 };
 
