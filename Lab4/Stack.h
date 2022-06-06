@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning( disable : 4290 )
+#pragma error( disable : 4290 )
 #ifndef _STACK_H_
 #define _STACK_H_
 #include <iostream>
@@ -16,9 +16,9 @@ public:
 	Stack();
 	int size() const;
 	bool isEmpty() const;
-	const T& peek() const throw(StackEmpty);
+	const T& peek() const;
 	void push(const T& data);
-	void pop() throw(StackEmpty);
+	void pop();
 };
 
 template <typename T>
@@ -40,7 +40,7 @@ bool Stack<T>::isEmpty() const
 }
 
 template <typename T>
-const T& Stack<T>::peek() const throw(StackEmpty)
+const T& Stack<T>::peek() const
 {
 	if (isEmpty())
 	{
@@ -58,7 +58,7 @@ void Stack<T>::push(const T& data)
 }
 
 template <typename T>
-void Stack<T>::pop() throw(StackEmpty)
+void Stack<T>::pop()
 {
 	if (isEmpty())
 	{

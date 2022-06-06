@@ -2,10 +2,10 @@
 #include "StackEmpty.h"
 #include "Stack.h"
 
-std::string in2prefix(const std::string& in)
-{
+// std::string in2prefix(const std::string& in)
+// {
 	
-}
+// }
 
 //std::string pre2infix(std::string pre)
 //{
@@ -20,6 +20,6 @@ std::string in2prefix(const std::string& in)
 
 int main()
 {
-
+	std::cout << "test" << std::endl;
 	return 0;
 }
