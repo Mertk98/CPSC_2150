@@ -1,5 +1,6 @@
+// Mert Kilic
+// 100334228
 #pragma once
-#pragma error( disable : 4290 )
 #ifndef _STACK_H_
 #define _STACK_H_
 #include <iostream>
