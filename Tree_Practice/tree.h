@@ -11,7 +11,7 @@ private:
 public:
     Node();
     Node(T data, Node<T>* parent, Node<T>* children_);
-}
+};
 
 template <typename T>
 class Tree
@@ -21,6 +21,6 @@ private:
 public:
     Tree();
     Tree(T root);
-}
+};
 
 #endif
