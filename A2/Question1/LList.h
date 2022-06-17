@@ -15,7 +15,7 @@ private:
 public:
 	Node();
 	Node(T* data, Node<T>* next);
-	template<typename T>
+	template <typename U>
 	friend class LList;
 	~Node() = default;
 };
