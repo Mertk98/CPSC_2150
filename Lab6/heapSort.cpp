@@ -1,13 +1,17 @@
+// Mert Kilic
+// 100334228
 #include <iostream>
 #include <random>
 #include <ctime>
 
+// find max
 int max(int* dataList, int num1, int num2)
 {
     int max = (dataList[num1] >= dataList[num2]) ? num1 : num2;
     return max;
 }
 
+//swap items in the array
 void swap(int* dataList, int data1, int data2)
 {
     int tmp = dataList[data1];
@@ -15,6 +19,7 @@ void swap(int* dataList, int data1, int data2)
     dataList[data2] = tmp;
 }
 
+// heapify the max-heap
 // logn runtime
 void heapify(int* dataList, int size, int data)
 {
@@ -39,6 +44,7 @@ void heapify(int* dataList, int size, int data)
         }
         else
         {
+            // if there is no right child at the end
             if(dataList[left] > dataList[current])
             {
                 swap(dataList, current, left);
@@ -49,7 +55,7 @@ void heapify(int* dataList, int size, int data)
     }
 }
 
-// insert the element to heap
+// insert the element into max-heap
 // takes logn time
 void insert(int* dataList, int data)
 {
@@ -75,6 +81,7 @@ void insert(int* dataList, int data)
     }
 }
 
+// create a max heap
 void createHeap(int* dataList, int size)
 {
     // n times
@@ -85,6 +92,7 @@ void createHeap(int* dataList, int size)
     }
 }
 
+// sort the dataset by using max-heap and heapify
 void heapSort(int* dataList, int size)
 {
     int root = 0;
@@ -107,6 +115,7 @@ void heapSort(int* dataList, int size)
 
 int main()
 {
+    // Testing
     int size = 15;
     int* dataList = new int[size];
     srand(time(0));
@@ -131,5 +140,6 @@ int main()
         std::cout << dataList[i] << std::endl;
     }
 
+    delete[] dataList;
     return 0;
 }
