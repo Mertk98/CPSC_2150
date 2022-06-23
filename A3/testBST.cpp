@@ -2,12 +2,14 @@
 #include <ctime>
 #include <vector>
 
+// instructions for random number generating algorithm
 void printInstructions()
 {
     std::cout << "To generate a random positive integer, enter 0." << std::endl;
     std::cout << "Otherwise, enter a positive integer." << std::endl;
 }
 
+// generate either a random num or user input depending on the input
 int getInput()
 {
     int num = -1;
@@ -26,6 +28,7 @@ int getInput()
     return num;
 }
 
+// generate a list of random integers in an interval of [-n,n]
 std::vector<int> genData(int n)
 {
     std::vector<int> list;
@@ -40,6 +43,7 @@ std::vector<int> genData(int n)
     
 }
 
+// print the list items
 void printList(std::vector<int> list)
 {   
     std::cout << "{ ";
@@ -55,10 +59,12 @@ int main()
     // get different random nums all the time
     srand(time(0));
 
+    // first data list
     int n1 = getInput();
     std::vector<int> list1 = genData(n1);
     printList(list1);
 
+    // second data list
     int n2 = getInput();
     std::vector<int> list2 = genData(n2);
     printList(list2);
