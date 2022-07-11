@@ -155,8 +155,5 @@ int main()
     DeleteAVLTree(avl);
     printAVL(avl);
 
-    delete avl;
-    avl = nullptr;
-
 	return 0;
 }
