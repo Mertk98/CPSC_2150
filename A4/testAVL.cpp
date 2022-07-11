@@ -44,6 +44,7 @@ void genInputFile(int n, std::string myFile)
         int num = (rand() % (4999-1001+1)) + 1001;
         outFile << num << std::endl;
     }
+
     outFile.close();
 }
 
@@ -56,7 +57,15 @@ void InsertNodeAVL(AVLTree<T>* avl, T node)
 template <typename T>
 void printAVL(AVLTree<T>* avl)
 {
-    avl->printInNPreOrder();
+    if (avl != nullptr)
+    {
+        avl->printInNPreOrder();
+        std::cout << " " << std::endl;
+    }
+    else
+    {
+        std::cout << "Tree does not exist!!!" << std::endl;
+    }
 }
 
 template <typename T>
@@ -82,7 +91,7 @@ AVLTree<T>* BuildAVLTree(std::string myFile)
             {
                 break;
             }
-            else if (i > -1)
+            else if (i > -1 && tmp != "")
             {
                 int data = std::stoi(tmp);
                 InsertNodeAVL(avl, data);
@@ -93,6 +102,7 @@ AVLTree<T>* BuildAVLTree(std::string myFile)
             }
             i++;
 		}
+
 		inFile.close();
 	}
 
@@ -100,7 +110,13 @@ AVLTree<T>* BuildAVLTree(std::string myFile)
 }
 
 template <typename T>
-void DeleteNodeAVL(AVLTree<T>* tree)
+void DeleteNodeAVL(AVLTree<T>* tree, const T node)
+{
+    tree->remove(node);
+}
+
+template <typename T>
+void DeleteAVLTree(AVLTree<T>* tree)
 {
     tree->deleteAVL();
 }
@@ -109,14 +125,38 @@ int main()
 {
     // get different random nums all the time
     srand(time(0));
+    // filename
     std::string myFile = "test1.txt";
+    int node;
+    // creating input
     int n = getInput();
     genInputFile(n, myFile);
 
+    // tree initialization
     AVLTree<int>* avl = BuildAVLTree<int>(myFile);
     std::cout << "height of AVL tree is: " << avl->height() << std::endl;
     printAVL(avl);
+    
+    // inserting an element
+    std::cout << "Enter a value to insert: ";
+    std::cin >> node;
+    InsertNodeAVL(avl, node);
+    std::cout << "height of the AVL tree is: " << avl->height() << std::endl;
+    printAVL(avl);
+
+    // deleting an element
+    std::cout << "Enter a value to delete: ";
+    std::cin >> node;
+    DeleteNodeAVL(avl, node);
+    std::cout << "height of AVL tree is: " << avl->height() << std::endl;
+    printAVL(avl);
+
+    // deleting the tree
+    DeleteAVLTree(avl);
+    printAVL(avl);
 
     delete avl;
+    avl = nullptr;
+
 	return 0;
 }

@@ -8,6 +8,7 @@ private:
     T data_;
     Node* left_;
     Node* right_;
+    int height;
     template <typename U>
     friend class BST;
     template <typename U>
@@ -26,6 +27,7 @@ Node<T>::Node()
 {
     left_ = nullptr;
     right_ = nullptr;
+    height = 0;
 }
 
 template <typename T>
@@ -34,6 +36,7 @@ Node<T>::Node(T data)
     data_ = data;
     left_ = nullptr;
     right_ = nullptr;
+    height = 0;
 }
 
 template <typename T>
@@ -42,6 +45,7 @@ Node<T>::Node(Node<T>* left, Node<T>* right, T data)
     data_ = data;
     left_ = left;
     right_ = right;
+    height = 0;
 }
 
 #endif // !_NODE_H_

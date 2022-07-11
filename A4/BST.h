@@ -7,13 +7,6 @@
 template <typename T>
 class BST
 {
-private:
-    Node<T>* predecessor(Node<T>* node);
-    Node<T>* successor(Node<T>* node);
-    // sort the tree using inorder traversal
-    void sortInOrder(Node<T>* node, std::vector<T>& list);
-    // recursive delete
-    Node<T>* remove(Node<T>* node, const T data);
 protected:
     int size_;
     Node<T>* root_;
@@ -22,6 +15,14 @@ protected:
     int height(Node<T>* node);
     // insert the node to BST recursively
     void insert(Node<T>* node, const T data);
+    // find the inorder predecessor
+    Node<T>* predecessor(Node<T>* node);
+    // find the inorder successor
+    Node<T>* successor(Node<T>* node);
+    // sort the tree using inorder traversal
+    void sortInOrder(Node<T>* node, std::vector<T>& list);
+    // recursive delete
+    Node<T>* remove(Node<T>* node, const T data);
     // traverse the tree by using in-order traversal algorithm
     void inOrderTraversal(Node<T>* node);
     // traverse the tree by using pre-order traversal algorithm
