@@ -30,6 +30,24 @@ int Hash::additive(std::string word)
 	return (num % (int)std::pow(2, 16));
 }
 
+int Hash::mystery(std::string word)
+{
+	int num = additive(word);
+	int mid = word.length() / 2;
+	int i = int(word[mid]);
+
+	return ((num + i*i)%(int)std::pow(2,16));
+}
+
+int Hash::bonus(std::string word)
+{
+	int num = additive(word);
+	int mid = word.length() / 2;
+	int i = int(word[mid]);
+
+	return (((num*num) + (i*i)) >> 1 % (int)std::pow(2,16)) * 2;
+}
+
 int Hash::difference()
 {
 	int max = 0;
@@ -120,5 +138,41 @@ void Hash::collisionTest()
 	inFile.close();
 
 	std::cout << "Additive: " << difference() << std::endl;
+	resetTable();
+
+	inFile.open(inputFile);
+
+	// Mystery
+	if (inFile.is_open())
+	{
+		std::string tmp = "";
+
+		while (std::getline(inFile, tmp))
+		{
+			int index = mystery(tmp);
+			hashTable[index]++;
+		}
+	}
+	inFile.close();
+
+	std::cout << "Mystery: " << difference() << std::endl;
+	resetTable();
+
+	inFile.open(inputFile);
+
+	// Mystery
+	if (inFile.is_open())
+	{
+		std::string tmp = "";
+
+		while (std::getline(inFile, tmp))
+		{
+			int index = bonus(tmp);
+			hashTable[index]++;
+		}
+	}
+	inFile.close();
+
+	std::cout << "Bonus: " << difference() << std::endl;
 	resetTable();
 }

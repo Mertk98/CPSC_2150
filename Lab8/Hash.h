@@ -15,6 +15,8 @@ private:
     int strLength(std::string word);
     int firstChar(std::string word);
     int additive(std::string word);
+    int mystery(std::string word);
+    int bonus(std::string word);
     int difference();
     void resetTable();
 public:
