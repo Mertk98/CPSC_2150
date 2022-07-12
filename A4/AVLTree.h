@@ -40,6 +40,69 @@ public:
 };
 
 template <typename T>
+int AVLTree<T>::balanceFactor(Node<T>* node)
+{
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	else if ((node->left_ == nullptr && node->right_ == nullptr))
+	{
+		return 0;
+	}
+	else if (node->left_ != nullptr && node->right_ == nullptr)
+	{
+		return 0 - node->height;
+	}
+	else if (node->left_ == nullptr && node->right_ != nullptr)
+	{
+		return node->height;
+	}
+	else
+	{
+		return node->right_->height - node->left_->height;
+	}
+}
+
+template <typename T>
+bool AVLTree<T>::checkBalance(Node<T>* node)
+{
+	return (std::abs(balanceFactor(node)) < 2);
+}
+
+template <typename T>
+void AVLTree<T>::setHeight(Node<T>* node)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	else if (node->left_ == nullptr && node->right_ == nullptr)
+	{
+		node->height = 0;
+	}
+	else if (node->left_ == nullptr && node->right_ != nullptr)
+	{
+		node->height = node->right_->height + 1;
+	}
+	else if (node->left_ != nullptr && node->right_ == nullptr)
+	{
+		node->height = node->left_->height + 1;
+	}
+	else
+	{
+		if (node->left_->height > node->right_->height)
+		{
+			node->height = node->left_->height + 1;
+		}
+		else
+		{
+			node->height = node->right_->height + 1;
+		}
+	}
+}
+
+template <typename T>
 Node<T>* AVLTree<T>::leftRotation(Node<T>* node)
 {
 	Node<T>* tmp = node;
@@ -156,69 +219,6 @@ Node<T>* AVLTree<T>::handleRotation(Node<T>* node)
 }
 
 template <typename T>
-int AVLTree<T>::balanceFactor(Node<T>* node)
-{
-	if (node == nullptr)
-	{
-		return 0;
-	}
-	else if ((node->left_ == nullptr && node->right_ == nullptr))
-	{
-		return 0;
-	}
-	else if (node->left_ != nullptr && node->right_ == nullptr)
-	{
-		return 0 - node->height;
-	}
-	else if (node->left_ == nullptr && node->right_ != nullptr)
-	{
-		return node->height;
-	}
-	else
-	{
-		return node->right_->height - node->left_->height;
-	}
-}
-
-template <typename T>
-bool AVLTree<T>::checkBalance(Node<T>* node)
-{
-	return (std::abs(balanceFactor(node)) < 2);
-}
-
-template <typename T>
-void AVLTree<T>::setHeight(Node<T>* node)
-{
-	if (node == nullptr)
-	{
-		return;
-	}
-	else if (node->left_ == nullptr && node->right_ == nullptr)
-	{
-		node->height = 0;
-	}
-	else if (node->left_ == nullptr && node->right_ != nullptr)
-	{
-		node->height = node->right_->height + 1;
-	}
-	else if (node->left_ != nullptr && node->right_ == nullptr)
-	{
-		node->height = node->left_->height + 1;
-	}
-	else
-	{
-		if (node->left_->height > node->right_->height)
-		{
-			node->height = node->left_->height + 1;
-		}
-		else
-		{
-			node->height = node->right_->height + 1;
-		}
-	}
-}
-
-template <typename T>
 Node<T>* AVLTree<T>::insert(Node<T>* node, const T data)
 {
 	if (data > node->data_)
@@ -316,8 +316,8 @@ Node<T>* AVLTree<T>::remove(Node<T>* node, const T data)
 		{
 			// find height of left subtree and right subtree to determine what to use
 			// either predecessor or successor
-			int lHeight = BST<T>::height(node->left_);
-			int rHeight = BST<T>::height(node->right_);
+			int lHeight = node->left_->height;
+			int rHeight = node->right_->height;
 
 			// use predecessor since left subtree height is larger
 			if (lHeight > rHeight)

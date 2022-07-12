@@ -88,7 +88,8 @@ void Hash::collisionTest()
 	std::cout << "The difference between maximum and minimum collision on the";
 	std::cout << " entries of the hash table using the following hash functions are: " << std::endl;
 	std::cout << "" << std::endl;
-	// string length test
+	
+	// string length
 	std::ifstream inFile;
 	inFile.open(inputFile);
 
@@ -163,7 +164,7 @@ void Hash::collisionTest()
 
 	inFile.open(inputFile);
 
-	// Mystery
+	// Bonus
 	if (inFile.is_open())
 	{
 		std::string tmp = "";
