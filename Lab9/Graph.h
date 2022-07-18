@@ -7,10 +7,14 @@ class Graph
 {
 private:
 	std::vector<std::vector<int[2]>> adjacenyList_;
+	int E_;
+	int V_;
 public:
-	Graph() = default;
-	void insert(int v1, int v2, int w);
-
+	Graph();
+	bool isEmpty();
+	void insertVertex(int v);
+	void insertEdge(int v1, int v2, int w);
+	void adjacent(int v);
 };
 
 #endif // !_GRAPH_H_
