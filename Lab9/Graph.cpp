@@ -194,7 +194,7 @@ void Graph::printEdges(std::string fileName)
 			{
 				int target = adjacencyList_[i][j]->target_;
 				int weight = adjacencyList_[i][j]->weight_;
-				if (visited[target] != 0)
+				if (visited[target] == 0)
 				{
 					outFile << i << " " << target << " " << weight << std::endl;
 				}
